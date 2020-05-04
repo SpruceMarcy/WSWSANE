@@ -1,13 +1,16 @@
 # WSWSANE
 
-What Star Wars Ships are Near Earth? A ruby gem that uses the NASA NEO API.
-Use this gem to find which space objects (asteroids etc.) are nearby to earth, and which star wars ship they are most likely to be based on their size.
+What Star Wars Ships are Near Earth? A ruby gem that uses the NASA NEO API.  
+Use this gem to find which space objects (asteroids etc.) are nearby to earth, and which Star Wars ships they are most likely to be based on their size.
 
 ## Installation
 
 ```bash
 gem install WSWSANE
 ```
+More information can be found on the RubyGems page:
+
+[https://rubygems.org/gems/WSWSANE](https://rubygems.org/gems/WSWSANE)
 
 ## Usage
 
@@ -39,13 +42,20 @@ WSWSANE.get(apikey,startDate,endDate,factions)
 ```
 The former will give you a list of NEOs (Near Earth Objects) that have their closest pass to earth today, whereas the latter allows you to specify a date range.
 
-The API key can be generated from here: [https://api.nasa.gov/](https://api.nasa.gov/).
-All dates are strings in the format "YYYY-MM-DD".
-The 'factions' parameter is optional and defaults to 
+The API key can be generated from here: [https://api.nasa.gov/](https://api.nasa.gov/)  
+All dates are strings in the format "YYYY-MM-DD".  
+The 'factions' parameter is optional and defaults to:
 ```ruby
 ["cis","republic","empire","rebel_alliance","first_order","resistance"]
 ```
 
+These functions will return a Hash resebmling the JSON provided by the NASA API. The field added by this gem can be accessed in a similar manner to this:
+```ruby
+neos = WSWSANE.get(apikey,"2020-01-01","2020-01-07")
+puts neos["near_earth_objects"]["2020-01-01"][0]["star_wars_ship"]
+#Lambda-class Shuttle
+```
+If the object couldn't be classified, then the "star_wars_ship" value will be "None".
 
 ## License
 [Unlicense](https://choosealicense.com/licenses/unlicense/)
